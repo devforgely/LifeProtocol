@@ -1,4 +1,4 @@
-package com.example.lifeprotocol
+package com.devforgely.lifeprotocol
 
 import org.junit.Test
 

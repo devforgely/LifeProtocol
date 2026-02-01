@@ -1,4 +1,4 @@
-package com.example.lifeprotocol.ui.theme
+package com.devforgely.lifeprotocol.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
