@@ -13,14 +13,14 @@ fun  LifeProtocolBottomBar(currentRoute: String?, onNavigate: (String) -> Unit) 
         actions = {
             NavItem(
                 selected = currentRoute == MainDestinations.MORNING_ROUTE,
-                icon_id = R.drawable.ic_sunny,
+                iconId = R.drawable.ic_sunny,
                 label = MainDestinations.MORNING_ROUTE,
                 onClick = { onNavigate(MainDestinations.MORNING_ROUTE) }
             )
 
             NavItem(
                 selected = currentRoute == MainDestinations.DAY_ROUTE,
-                icon_id = R.drawable.ic_flash_on,
+                iconId = R.drawable.ic_flash_on,
                 label = MainDestinations.DAY_ROUTE,
                 onClick = { onNavigate(MainDestinations.DAY_ROUTE) }
             )
@@ -29,14 +29,14 @@ fun  LifeProtocolBottomBar(currentRoute: String?, onNavigate: (String) -> Unit) 
 
             NavItem(
                 selected = currentRoute == MainDestinations.NIGHT_ROUTE,
-                icon_id = R.drawable.ic_moon_stars,
+                iconId = R.drawable.ic_moon_stars,
                 label = MainDestinations.NIGHT_ROUTE,
                 onClick = { onNavigate(MainDestinations.NIGHT_ROUTE) }
             )
 
             NavItem(
                 selected = currentRoute == MainDestinations.MENU_ROUTE,
-                icon_id = R.drawable.ic_settings,
+                iconId = R.drawable.ic_settings,
                 label = MainDestinations.MENU_ROUTE,
                 onClick = { onNavigate(MainDestinations.MENU_ROUTE) }
             )

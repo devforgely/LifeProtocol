@@ -1,5 +1,6 @@
 package com.devforgely.lifeprotocol
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -11,6 +12,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -22,16 +26,23 @@ import com.devforgely.lifeprotocol.navigation.LifeProtocolBottomBar
 import com.devforgely.lifeprotocol.navigation.MainDestinations
 import com.devforgely.lifeprotocol.navigation.rememberLifeProtocolNavController
 import com.devforgely.lifeprotocol.ui.theme.LifeProtocolTheme
-import com.devforgely.lifeprotocol.views.DayView
+import com.devforgely.lifeprotocol.views.DayProtocolView
 import com.devforgely.lifeprotocol.views.MenuView
-import com.devforgely.lifeprotocol.views.MorningView
-import com.devforgely.lifeprotocol.views.NightView
+import com.devforgely.lifeprotocol.views.MorningProtocolView
+import com.devforgely.lifeprotocol.views.NightProtocolView
 import com.devforgely.lifeprotocol.views.ProfileView
 
 @Preview
 @Composable
 fun LifeProtocolApp() {
-    LifeProtocolTheme {
+    val isSystemInDarkTheme = isSystemInDarkTheme()
+    var isDarkMode by rememberSaveable {
+        mutableStateOf(isSystemInDarkTheme)
+    }
+
+    LifeProtocolTheme(
+        darkTheme = isDarkMode
+    ) {
         val lifeProtocolNavController = rememberLifeProtocolNavController()
         val navController = lifeProtocolNavController.navController
 
@@ -71,11 +82,14 @@ fun LifeProtocolApp() {
                 startDestination = MainDestinations.PROFILE_ROUTE,
                 modifier = Modifier.padding(innerPadding)
             ) {
-                composable(MainDestinations.MORNING_ROUTE) { MorningView() }
-                composable(MainDestinations.DAY_ROUTE) { DayView() }
+                composable(MainDestinations.MORNING_ROUTE) { MorningProtocolView(0f) }
+                composable(MainDestinations.DAY_ROUTE) { DayProtocolView() }
                 composable(MainDestinations.PROFILE_ROUTE) { ProfileView() }
-                composable(MainDestinations.NIGHT_ROUTE) { NightView() }
-                composable(MainDestinations.MENU_ROUTE) { MenuView() }
+                composable(MainDestinations.NIGHT_ROUTE) { NightProtocolView() }
+                composable(MainDestinations.MENU_ROUTE) { MenuView(
+                    isDarkMode = isDarkMode,
+                    onDarkModeChange = { isDarkMode = it }
+                )}
             }
         }
     }
