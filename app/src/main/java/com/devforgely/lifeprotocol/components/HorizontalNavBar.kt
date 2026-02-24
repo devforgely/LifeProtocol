@@ -36,8 +36,7 @@ fun HorizontalNavBar(tabs: List<String>, selected: Int, onSelect: (Int) -> Unit)
                     .weight(1f)
                     .clip(RoundedCornerShape(50))
                     .background(if (active) MaterialTheme.colorScheme.surfaceDim else Color.Transparent)
-                    .clickable { onSelect(index) }
-                    .padding(vertical = 12.dp),
+                    .clickable { onSelect(index) },
                 contentAlignment = Alignment.Center
             ) {
                 Text(
