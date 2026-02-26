@@ -22,15 +22,15 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.devforgely.lifeprotocol.navigation.LifeProtocolBottomBar
-import com.devforgely.lifeprotocol.navigation.MainDestinations
-import com.devforgely.lifeprotocol.navigation.rememberLifeProtocolNavController
-import com.devforgely.lifeprotocol.ui.theme.LifeProtocolTheme
-import com.devforgely.lifeprotocol.views.DayProtocolView
-import com.devforgely.lifeprotocol.views.MenuView
-import com.devforgely.lifeprotocol.views.MorningProtocolView
-import com.devforgely.lifeprotocol.views.NightProtocolView
-import com.devforgely.lifeprotocol.views.ProfileView
+import com.devforgely.lifeprotocol.core.navigation.LifeProtocolBottomBar
+import com.devforgely.lifeprotocol.core.navigation.MainDestinations
+import com.devforgely.lifeprotocol.core.navigation.rememberLifeProtocolNavController
+import com.devforgely.lifeprotocol.core.theme.LifeProtocolTheme
+import com.devforgely.lifeprotocol.ui.dayprotocol.DayProtocolView
+import com.devforgely.lifeprotocol.ui.morningprotocol.MorningProtocolView
+import com.devforgely.lifeprotocol.ui.nightprotocol.NightProtocolView
+import com.devforgely.lifeprotocol.ui.profile.ProfileView
+import com.devforgely.lifeprotocol.ui.setting.SettingView
 
 @Preview
 @Composable
@@ -86,7 +86,7 @@ fun LifeProtocolApp() {
                 composable(MainDestinations.DAY_ROUTE) { DayProtocolView() }
                 composable(MainDestinations.PROFILE_ROUTE) { ProfileView() }
                 composable(MainDestinations.NIGHT_ROUTE) { NightProtocolView() }
-                composable(MainDestinations.MENU_ROUTE) { MenuView(
+                composable(MainDestinations.MENU_ROUTE) { SettingView(
                     isDarkMode = isDarkMode,
                     onDarkModeChange = { isDarkMode = it }
                 )}
