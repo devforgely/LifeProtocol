@@ -24,7 +24,7 @@ fun ProgressDots(length: Int, progress: Float) {
                     .width(if (index == 0) 26.dp else 6.dp)
                     .clip(RoundedCornerShape(50))
                     .background(
-                        if (filled) MaterialTheme.colorScheme.surfaceTint
+                        if (filled) MaterialTheme.colorScheme.primary
                         else MaterialTheme.colorScheme.onSurface
                     )
             )

@@ -11,6 +11,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SuggestionChip
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -39,13 +40,19 @@ fun TimeRangeRow(
         verticalAlignment = Alignment.CenterVertically
     ) {
 
-        TimeChip(range.start) { onPickTime(day, range.id, true) }
+        SuggestionChip(
+            onClick = { onPickTime(day, range.id, true) },
+            label = { Text(range.start.toString()) }
+        )
 
         Spacer(Modifier.width(8.dp))
         Text("–", color = MaterialTheme.colorScheme.secondary)
         Spacer(Modifier.width(8.dp))
 
-        TimeChip(range.end) { onPickTime(day, range.id, false) }
+        SuggestionChip(
+            onClick = { onPickTime(day, range.id, true) },
+            label = { Text(range.end.toString()) }
+        )
 
         Spacer(Modifier.weight(1f))
 

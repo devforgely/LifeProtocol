@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -23,12 +24,16 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun HeaderSection(iconId: Int, iconColor: Color, title: String, subtitle: String) {
-    Row(verticalAlignment = Alignment.CenterVertically) {
+    Row(
+        modifier = Modifier.fillMaxWidth()
+            .background(Color.Transparent),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
         Box(
             modifier = Modifier
                 .size(42.dp)
                 .clip(RoundedCornerShape(12.dp))
-                .background(iconColor.copy(alpha = .1f)),
+                .background(iconColor.copy(alpha = .15f)),
             contentAlignment = Alignment.Center
         ) {
             Icon(
@@ -44,14 +49,11 @@ fun HeaderSection(iconId: Int, iconColor: Color, title: String, subtitle: String
             Text(
                 text = title,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
-                fontSize = 20.sp,
-                fontWeight = FontWeight.SemiBold
+                style = MaterialTheme.typography.headlineSmall,
             )
             Text(
                 text = subtitle,
                 color = MaterialTheme.colorScheme.secondary,
-                fontSize = 12.sp,
-                letterSpacing = 1.5.sp
             )
         }
     }

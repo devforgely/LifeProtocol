@@ -1,6 +1,5 @@
 package com.devforgely.lifeprotocol.core.components
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -37,11 +36,9 @@ fun QuestionCard(title: String = "QUESTION", description: String, textPlaceHolde
 
     Card(
         modifier = Modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
-        ),
-        shape = RoundedCornerShape(24.dp),
-        border = BorderStroke(1.dp, MaterialTheme.colorScheme.surfaceDim)
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.background),
+        elevation = CardDefaults.elevatedCardElevation(3.dp)
     ) {
         Column(
             modifier = Modifier.padding(20.dp)
@@ -55,41 +52,36 @@ fun QuestionCard(title: String = "QUESTION", description: String, textPlaceHolde
                 ProgressDots(4, progress)
                 Text(
                     text = "1 / 4",
-                    color = MaterialTheme.colorScheme.secondary,
-                    fontSize = 14.sp
+                    color = MaterialTheme.colorScheme.onSurface
                 )
             }
 
-            Spacer(Modifier.height(20.dp))
+            Spacer(Modifier.height(7.dp))
 
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Icon(
                     painter = painterResource(R.drawable.ic_quiz),
                     contentDescription = null,
                     tint = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier.size(20.dp)
+                    modifier = Modifier.size(24.dp)
                 )
-                Spacer(Modifier.width(8.dp))
+                Spacer(Modifier.width(7.dp))
                 Text(
                     text = title,
                     color = MaterialTheme.colorScheme.primary,
-                    fontSize = 14.sp,
-                    letterSpacing = 1.5.sp,
-                    fontWeight = FontWeight.SemiBold
+                    style = MaterialTheme.typography.titleMedium
                 )
             }
 
-            Spacer(Modifier.height(14.dp))
+            Spacer(Modifier.height(7.dp))
 
             Text(
                 text = description,
                 color = MaterialTheme.colorScheme.onSurface,
-                fontSize = 18.sp,
-                fontWeight = FontWeight.SemiBold,
-                lineHeight = 26.sp
+                style = MaterialTheme.typography.titleMedium
             )
 
-            Spacer(Modifier.height(18.dp))
+            Spacer(Modifier.height(7.dp))
 
             OutlinedTextField(
                 value = text,

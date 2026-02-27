@@ -24,7 +24,7 @@ fun ExpandingButton(text: String, iconId: Int, onClick: () -> Unit) {
         modifier = Modifier
             .fillMaxWidth()
             .height(58.dp),
-        shape = RoundedCornerShape(18.dp),
+        shape = RoundedCornerShape(50),
         colors = ButtonDefaults.buttonColors(
             containerColor = MaterialTheme.colorScheme.primary,
             contentColor = MaterialTheme.colorScheme.onPrimary
@@ -38,7 +38,7 @@ fun ExpandingButton(text: String, iconId: Int, onClick: () -> Unit) {
         Spacer(Modifier.width(8.dp))
         Icon(
             painter = painterResource(iconId),
-            contentDescription = "Button Icon"
+            contentDescription = null
         )
     }
 }

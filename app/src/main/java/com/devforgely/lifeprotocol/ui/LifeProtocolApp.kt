@@ -1,6 +1,7 @@
-package com.devforgely.lifeprotocol
+package com.devforgely.lifeprotocol.ui
 
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -16,12 +17,16 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.paint
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.devforgely.lifeprotocol.R
 import com.devforgely.lifeprotocol.core.navigation.LifeProtocolBottomBar
 import com.devforgely.lifeprotocol.core.navigation.MainDestinations
 import com.devforgely.lifeprotocol.core.navigation.rememberLifeProtocolNavController
@@ -50,14 +55,13 @@ fun LifeProtocolApp() {
         val currentRoute = navBackStackEntry?.destination?.route
 
         Scaffold(
-            bottomBar = { LifeProtocolBottomBar(
-                currentRoute = currentRoute,
-                onNavigate = { route ->
-                    navBackStackEntry?.let { entry ->
-                        lifeProtocolNavController.navigateTo(route, entry)
-                    }
-                }
-            )},
+            modifier = Modifier
+                .fillMaxSize()
+                .paint(
+                    painter = painterResource(R.mipmap.background),
+                    contentScale = ContentScale.Crop
+                ),
+            containerColor = Color.Transparent,
             floatingActionButton = {
                 FloatingActionButton(
                     onClick = { navBackStackEntry?.let { entry ->
@@ -75,18 +79,26 @@ fun LifeProtocolApp() {
                     )
                 }
             },
-            floatingActionButtonPosition = FabPosition.Center
+            floatingActionButtonPosition = FabPosition.Center,
+            bottomBar = { LifeProtocolBottomBar(
+                currentRoute = currentRoute,
+                onNavigate = { route ->
+                    navBackStackEntry?.let { entry ->
+                        lifeProtocolNavController.navigateTo(route, entry)
+                    }
+                }
+            )}
         ) { innerPadding ->
             NavHost(
                 navController = navController,
                 startDestination = MainDestinations.PROFILE_ROUTE,
                 modifier = Modifier.padding(innerPadding)
             ) {
-                composable(MainDestinations.MORNING_ROUTE) { MorningProtocolView(0f) }
+                composable(MainDestinations.MORNING_ROUTE) { MorningProtocolView(1f) }
                 composable(MainDestinations.DAY_ROUTE) { DayProtocolView() }
                 composable(MainDestinations.PROFILE_ROUTE) { ProfileView() }
                 composable(MainDestinations.NIGHT_ROUTE) { NightProtocolView() }
-                composable(MainDestinations.MENU_ROUTE) { SettingView(
+                composable(MainDestinations.SETTING_ROUTE) { SettingView(
                     isDarkMode = isDarkMode,
                     onDarkModeChange = { isDarkMode = it }
                 )}

@@ -17,7 +17,7 @@ object MainDestinations {
     const val DAY_ROUTE = "Day"
     const val PROFILE_ROUTE = "Profile"
     const val NIGHT_ROUTE = "Night"
-    const val MENU_ROUTE = "Menu"
+    const val SETTING_ROUTE = "Settings"
 }
 
 /**
