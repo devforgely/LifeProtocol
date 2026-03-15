@@ -20,62 +20,63 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 
 @Composable
 fun ToggleSettingCard(title: String, description: String?, iconId: Int, iconColor: Color, enabled: Boolean, onToggle: (Boolean) -> Unit) {
     Card(
         modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(26.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerHigh)
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+        elevation = CardDefaults.elevatedCardElevation(2.dp)
     ) {
         Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 20.dp, vertical = 22.dp),
+            modifier = Modifier.padding(16.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.Top
+            verticalAlignment = Alignment.CenterVertically
         ) {
-
-            Row(modifier = Modifier.weight(1f)) {
+            // Left side: Icon + Text
+            Row(
+                modifier = Modifier.weight(1f), // Let the text take available space
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                // Icon Container with subtle background
                 Box(
-                    modifier = Modifier
-                        .size(40.dp)
-                        .clip(RoundedCornerShape(12.dp)),
+                    modifier = Modifier.size(42.dp),
                     contentAlignment = Alignment.Center
                 ) {
                     Icon(
                         painter = painterResource(iconId),
                         contentDescription = null,
                         tint = iconColor,
-                        modifier = Modifier.size(30.dp)
+                        modifier = Modifier.size(24.dp)
                     )
                 }
 
-                Spacer(Modifier.width(14.dp))
+                Spacer(Modifier.width(16.dp))
 
                 Column {
                     Text(
                         text = title,
+                        style = MaterialTheme.typography.titleMedium, // Use Typography for consistency
                         color = MaterialTheme.colorScheme.onSurface,
-                        fontSize = 18.sp,
-                        fontWeight = FontWeight.SemiBold
+                        fontWeight = FontWeight.Bold
                     )
 
                     description?.let {
                         Text(
                             text = it,
-                            color = MaterialTheme.colorScheme.secondary,
-                            fontSize = 14.sp
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant // More accessible contrast
                         )
                     }
                 }
             }
+
+            Spacer(Modifier.width(8.dp)) // Buffer for the Switch
 
             Switch(
                 checked = enabled,

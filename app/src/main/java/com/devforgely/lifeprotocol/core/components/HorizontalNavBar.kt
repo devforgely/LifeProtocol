@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
@@ -15,7 +16,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -23,10 +23,11 @@ fun HorizontalNavBar(tabs: List<String>, selected: Int, onSelect: (Int) -> Unit)
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .clip(RoundedCornerShape(50))
-            .background(MaterialTheme.colorScheme.surfaceContainerHigh)
-            .padding(6.dp),
-        horizontalArrangement = Arrangement.SpaceBetween
+            .padding(12.dp, 8.dp)
+            .clip(RoundedCornerShape(16.dp))
+            .background(MaterialTheme.colorScheme.surfaceContainer),
+        horizontalArrangement = Arrangement.spacedBy(4.dp),
+        verticalAlignment = Alignment.CenterVertically
     ) {
         tabs.forEachIndexed { index, title ->
             val active = index == selected
@@ -34,15 +35,23 @@ fun HorizontalNavBar(tabs: List<String>, selected: Int, onSelect: (Int) -> Unit)
             Box(
                 modifier = Modifier
                     .weight(1f)
-                    .clip(RoundedCornerShape(50))
-                    .background(if (active) MaterialTheme.colorScheme.surfaceDim else Color.Transparent)
+                    .height(45.dp)
+                    .clip(RoundedCornerShape(16.dp))
+                    .background(
+                        if (active) MaterialTheme.colorScheme.secondaryContainer
+                        else Color.Transparent
+                    )
                     .clickable { onSelect(index) },
                 contentAlignment = Alignment.Center
             ) {
                 Text(
                     text = title,
-                    color = if (active) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.secondary,
-                    fontWeight = FontWeight.SemiBold
+                    style = MaterialTheme.typography.titleMedium,
+                    color = if (active) {
+                        MaterialTheme.colorScheme.onSecondaryContainer
+                    } else {
+                        MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
+                    }
                 )
             }
         }

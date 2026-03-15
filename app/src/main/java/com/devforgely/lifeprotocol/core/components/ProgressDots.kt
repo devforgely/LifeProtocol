@@ -9,23 +9,27 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun ProgressDots(length: Int, progress: Float) {
-    Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+fun ProgressDots(length: Int, progress: Int) {
+    Row(
+        horizontalArrangement = Arrangement.spacedBy(6.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
         repeat(length) { index ->
-            val filled = index < (progress * length).toInt()
+            val isFilled = index < progress
             Box(
                 modifier = Modifier
-                    .height(6.dp)
-                    .width(if (index == 0) 26.dp else 6.dp)
+                    .height(7.dp)
+                    .width(if (index == progress - 1) 26.dp else 7.dp)
                     .clip(RoundedCornerShape(50))
                     .background(
-                        if (filled) MaterialTheme.colorScheme.primary
-                        else MaterialTheme.colorScheme.onSurface
+                        if (isFilled) MaterialTheme.colorScheme.primary
+                        else MaterialTheme.colorScheme.secondary
                     )
             )
         }

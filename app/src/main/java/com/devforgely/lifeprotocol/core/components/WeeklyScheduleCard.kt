@@ -8,9 +8,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -21,11 +23,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.devforgely.lifeprotocol.R
+import com.devforgely.lifeprotocol.core.theme.Orange
 import com.devforgely.lifeprotocol.domain.model.DaySchedule
 import com.devforgely.lifeprotocol.domain.model.TimeRange
-import com.devforgely.lifeprotocol.core.theme.Orange
 import java.time.DayOfWeek
 import java.time.LocalTime
 
@@ -39,15 +40,21 @@ fun WeeklyScheduleCard(
 ) {
     Card(
         modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(26.dp),
-        colors = CardDefaults.cardColors(MaterialTheme.colorScheme.surfaceContainerHigh)
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+        elevation = CardDefaults.elevatedCardElevation(2.dp)
     ) {
-        Column(modifier = Modifier.padding(20.dp)) {
+        Column(
+            modifier = Modifier.padding(16.dp)
+        ) {
             // Header
-            Row(verticalAlignment = Alignment.CenterVertically) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.padding(bottom = 12.dp)
+            ) {
                 Box(
                     modifier = Modifier
-                        .size(40.dp)
+                        .size(42.dp)
                         .clip(RoundedCornerShape(12.dp)),
                     contentAlignment = Alignment.Center
                 ) {
@@ -55,20 +62,29 @@ fun WeeklyScheduleCard(
                         painter = painterResource(R.drawable.ic_schedule),
                         contentDescription = null,
                         tint = Orange,
-                        modifier = Modifier.size(30.dp)
+                        modifier = Modifier.size(24.dp)
                     )
                 }
+
+                Spacer(Modifier.width(16.dp))
+
                 Text(
                     text = title,
+                    style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.onSurface,
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.SemiBold
+                    fontWeight = FontWeight.Bold
                 )
             }
 
-            Spacer(Modifier.height(12.dp))
+            schedules.forEachIndexed { index, daySchedule ->
+                if (index > 0) {
+                    HorizontalDivider(
+                        modifier = Modifier.padding(vertical = 8.dp),
+                        thickness = 0.5.dp,
+                        color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f)
+                    )
+                }
 
-            schedules.forEach { daySchedule ->
                 DaySection(
                     schedule = daySchedule,
                     onAddRange = {
@@ -93,6 +109,7 @@ fun WeeklyScheduleCard(
             Spacer(Modifier.height(12.dp))
 
             if (note.isNotBlank()) {
+                Spacer(Modifier.height(16.dp))
                 InfoBox(note)
             }
         }

@@ -18,9 +18,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.font.FontWeight.Companion.Bold
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 
 @Composable
 fun HeaderSection(iconId: Int, iconColor: Color, title: String, subtitle: String) {
@@ -50,10 +49,12 @@ fun HeaderSection(iconId: Int, iconColor: Color, title: String, subtitle: String
                 text = title,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 style = MaterialTheme.typography.headlineSmall,
+                fontWeight = Bold
             )
             Text(
                 text = subtitle,
                 color = MaterialTheme.colorScheme.secondary,
+                style = MaterialTheme.typography.titleMedium
             )
         }
     }

@@ -33,7 +33,7 @@ fun TimeRangeRow(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .clip(RoundedCornerShape(18.dp))
+            .clip(RoundedCornerShape(16.dp))
             .background(MaterialTheme.colorScheme.background)
             .border(1.dp, MaterialTheme.colorScheme.outline, RoundedCornerShape(18.dp))
             .padding(horizontal = 14.dp, vertical = 12.dp),

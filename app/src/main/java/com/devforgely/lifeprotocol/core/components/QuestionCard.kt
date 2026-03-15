@@ -25,23 +25,21 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.devforgely.lifeprotocol.R
 
 @Composable
-fun QuestionCard(title: String = "QUESTION", description: String, textPlaceHolder: String?, progress: Float) {
+fun QuestionCard(title: String = "QUESTION", description: String?, textPlaceHolder: String?, maxQuestion: Int, progress: Int) {
     var text by remember { mutableStateOf("") }
 
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.background),
-        elevation = CardDefaults.elevatedCardElevation(3.dp)
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+        elevation = CardDefaults.elevatedCardElevation(2.dp)
     ) {
         Column(
-            modifier = Modifier.padding(20.dp)
+            modifier = Modifier.padding(16.dp)
         ) {
             // Progress row
             Row(
@@ -49,9 +47,9 @@ fun QuestionCard(title: String = "QUESTION", description: String, textPlaceHolde
                 horizontalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier.fillMaxWidth()
             ) {
-                ProgressDots(4, progress)
+                ProgressDots(maxQuestion, progress)
                 Text(
-                    text = "1 / 4",
+                    text = "$progress / $maxQuestion",
                     color = MaterialTheme.colorScheme.onSurface
                 )
             }
@@ -76,7 +74,7 @@ fun QuestionCard(title: String = "QUESTION", description: String, textPlaceHolde
             Spacer(Modifier.height(7.dp))
 
             Text(
-                text = description,
+                text = description?: "",
                 color = MaterialTheme.colorScheme.onSurface,
                 style = MaterialTheme.typography.titleMedium
             )

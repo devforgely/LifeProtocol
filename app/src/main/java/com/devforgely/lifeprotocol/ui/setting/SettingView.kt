@@ -26,11 +26,11 @@ fun SettingView(isDarkMode: Boolean, onDarkModeChange: (Boolean) -> Unit) {
             .padding(horizontal = 20.dp, vertical = 24.dp)
     ) {
         Column {
-            HeaderSection(R.drawable.ic_settings, MaterialTheme.colorScheme.primary, "Menu", "ADJUST SETTINGS")
+            HeaderSection(R.drawable.ic_settings, MaterialTheme.colorScheme.primary, "Settings", "ADJUST PREFERENCES")
             Spacer(Modifier.height(28.dp))
 
             ToggleSettingCard("Random Awareness",
-                "The app will randomly ping you to break your trance and question your current state of being.",
+                "The app will randomly ping you to answer questions.",
                 R.drawable.ic_gpp_maybe,
                 Red,
                 true,
