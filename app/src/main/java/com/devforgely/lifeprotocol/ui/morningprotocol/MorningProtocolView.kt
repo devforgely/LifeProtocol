@@ -8,8 +8,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.devforgely.lifeprotocol.R
 import com.devforgely.lifeprotocol.core.components.ExpandingButton
 import com.devforgely.lifeprotocol.core.components.HeaderSection
@@ -17,7 +20,13 @@ import com.devforgely.lifeprotocol.core.components.QuestionCard
 import com.devforgely.lifeprotocol.core.theme.Orange
 
 @Composable
-fun MorningProtocolView(progress: Float, onContinue: () -> Unit = {}) {
+fun MorningProtocolView(
+    viewModel: MorningProtocolViewModel = hiltViewModel(),
+) {
+    val currentQuestion by viewModel.currentQuestion.collectAsState()
+    val progress by viewModel.progress.collectAsState()
+    val maxQuestion = viewModel.maxQuestions
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -30,9 +39,10 @@ fun MorningProtocolView(progress: Float, onContinue: () -> Unit = {}) {
             Column {
                 HeaderSection(R.drawable.ic_sunny, Orange,"Morning Protocol", "PHASE 1: VISION SETTING")
                 Spacer(Modifier.height(28.dp))
-                QuestionCard(description = "hi", textPlaceHolder = "I wake with clarity...", progress = progress)
+                QuestionCard(description = currentQuestion?.content,
+                    textPlaceHolder = currentQuestion?.hint, maxQuestion = maxQuestion, progress = progress)
             }
-            ExpandingButton("Continue", R.drawable.ic_keyboard_arrow_right, onContinue)
+            ExpandingButton("Continue", R.drawable.ic_keyboard_arrow_right, { viewModel.moveToNext() })
         }
     }
 }

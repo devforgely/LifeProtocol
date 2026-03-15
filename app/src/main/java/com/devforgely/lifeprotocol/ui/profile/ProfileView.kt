@@ -8,11 +8,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.devforgely.lifeprotocol.core.components.PlayerProfileCard
-import com.devforgely.lifeprotocol.domain.model.UserProfile
+import com.devforgely.lifeprotocol.domain.model.User
 
 @Composable
 fun ProfileView() {
-    val userProfile = UserProfile(1, "Impulsive", 100, 200, 1)
+    val userProfile = User(1, "Impulsive", 100, 200, 1)
 
     Box(
         modifier = Modifier

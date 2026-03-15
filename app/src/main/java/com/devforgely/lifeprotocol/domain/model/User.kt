@@ -1,6 +1,6 @@
 package com.devforgely.lifeprotocol.domain.model
 
-data class UserProfile(
+data class User(
     val level: Int,
     val rankTitle: String,
     val currentXp: Int,

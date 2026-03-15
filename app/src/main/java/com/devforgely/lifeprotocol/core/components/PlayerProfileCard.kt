@@ -19,19 +19,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.devforgely.lifeprotocol.domain.model.UserProfile
+import com.devforgely.lifeprotocol.domain.model.User
 
 @Composable
-fun PlayerProfileCard(data: UserProfile) {
+fun PlayerProfileCard(data: User) {
     Card(
+        modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.background),
-        elevation = CardDefaults.cardElevation(defaultElevation = 3.dp)
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
         Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(20.dp)
+            modifier = Modifier.padding(16.dp)
         ) {
             // Top Row
             Row(
@@ -39,7 +38,6 @@ fun PlayerProfileCard(data: UserProfile) {
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-
                 Column {
                     Text(
                         text = "LEVEL ${data.level}",
@@ -53,7 +51,7 @@ fun PlayerProfileCard(data: UserProfile) {
 
                     Text(
                         text = data.rankTitle,
-                        color = MaterialTheme.colorScheme.onBackground,
+                        color = MaterialTheme.colorScheme.onSurface,
                         fontSize = 24.sp,
                         fontWeight = FontWeight.Bold
                     )

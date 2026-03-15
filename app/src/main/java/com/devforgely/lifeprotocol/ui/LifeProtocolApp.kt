@@ -94,7 +94,7 @@ fun LifeProtocolApp() {
                 startDestination = MainDestinations.PROFILE_ROUTE,
                 modifier = Modifier.padding(innerPadding)
             ) {
-                composable(MainDestinations.MORNING_ROUTE) { MorningProtocolView(1f) }
+                composable(MainDestinations.MORNING_ROUTE) { MorningProtocolView() }
                 composable(MainDestinations.DAY_ROUTE) { DayProtocolView() }
                 composable(MainDestinations.PROFILE_ROUTE) { ProfileView() }
                 composable(MainDestinations.NIGHT_ROUTE) { NightProtocolView() }
