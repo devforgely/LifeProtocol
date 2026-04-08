@@ -64,6 +64,7 @@ dependencies {
     implementation(libs.google.hilt)
     ksp(libs.google.hilt.compiler)
     implementation(libs.androidx.hilt.lifecycle.viewmodel.compose)
+    implementation(libs.androidx.datastore.preferences)
 
 
     testImplementation(libs.junit)

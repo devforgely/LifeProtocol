@@ -12,10 +12,8 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
@@ -23,6 +21,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -39,11 +38,11 @@ import com.devforgely.lifeprotocol.ui.setting.SettingView
 
 @Preview
 @Composable
-fun LifeProtocolApp() {
-    val isSystemInDarkTheme = isSystemInDarkTheme()
-    var isDarkMode by rememberSaveable {
-        mutableStateOf(isSystemInDarkTheme)
-    }
+fun LifeProtocolApp(
+    viewModel: LifeProtocolAppViewModel = hiltViewModel()
+) {
+    val storedDarkMode by viewModel.darkMode.collectAsState(initial = null)
+    val isDarkMode = storedDarkMode ?: isSystemInDarkTheme()
 
     LifeProtocolTheme(
         darkTheme = isDarkMode
@@ -98,10 +97,7 @@ fun LifeProtocolApp() {
                 composable(MainDestinations.DAY_ROUTE) { DayProtocolView() }
                 composable(MainDestinations.PROFILE_ROUTE) { ProfileView() }
                 composable(MainDestinations.NIGHT_ROUTE) { NightProtocolView() }
-                composable(MainDestinations.SETTING_ROUTE) { SettingView(
-                    isDarkMode = isDarkMode,
-                    onDarkModeChange = { isDarkMode = it }
-                )}
+                composable(MainDestinations.SETTING_ROUTE) { SettingView() }
             }
         }
     }
