@@ -5,6 +5,7 @@ import com.devforgely.lifeprotocol.data.local.entity.QuestionEntity
 import com.devforgely.lifeprotocol.domain.model.Question
 import javax.inject.Inject
 
+
 class QuestionRepository @Inject constructor(
     private val dao: QuestionDao
 ) {

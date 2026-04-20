@@ -43,7 +43,7 @@ fun SettingView(
                 R.drawable.ic_gpp_maybe,
                 Red,
                 true,
-                {}
+                onToggle = { viewModel.onScheduleClicked() }
             )
 
             Spacer(Modifier.height(14.dp))
